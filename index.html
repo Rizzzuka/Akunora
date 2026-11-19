@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKUNORA - Belanja Online</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f6f8;color:#222}
+header{background:#fff;padding:15px 5%;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #ddd}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.logo{font-size:27px;font-weight:bold;color:#08a85a}
+.search{flex:1;min-width:160px;padding:12px;border:1px solid #ddd;border-radius:9px}
+button{border:0;border-radius:8px;padding:11px 16px;background:#08a85a;color:white;font-weight:bold;cursor:pointer}
+nav{display:flex;gap:20px;padding-top:15px;overflow:auto}
+nav a{color:#444;text-decoration:none;white-space:nowrap}
+.hero{margin:20px auto;background:linear-gradient(120deg,#087d48,#12c878);color:white;padding:35px 25px;border-radius:15px;max-width:1100px}
+.hero h1{font-size:30px;margin:0 0 12px}
+main{max-width:1100px;margin:auto;padding:0 15px}
+h2{font-size:21px}
+.categories{display:flex;gap:12px;overflow:auto}
+.category{background:white;padding:18px;border-radius:12px;min-width:100px;text-align:center}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.product{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px #ddd}
+.product img{width:100%;height:145px;object-fit:cover;background:#eee}
+.info{padding:12px}
+.price{color:#08a85a;font-weight:bold;margin:9px 0}
+footer{text-align:center;padding:30px;background:#fff;margin-top:35px;color:#777}
+@media(min-width:650px){.products{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="top">
+<div class="logo">AKUNORA</div>
+<input class="search" id="search" placeholder="Cari produk favoritmu..." oninput="searchProducts()">
+<button onclick="showCart()">🛒 <span id="cartCount">0</span></button>
+</div>
+<nav>
+<a href="#">Beranda</a>
+<a href="#kategori">Kategori</a>
+<a href="#produk">Produk</a>
+<a href="#tentang">Tentang Kami</a>
+</nav>
+</header>
+
+<main>
+<section class="hero">
+<h1>Selamat Datang di AKUNORA!</h1>
+<p>Temukan produk favoritmu dengan mudah dan nyaman.</p>
+<button onclick="document.getElementById('produk').scrollIntoView()">Belanja Sekarang</button>
+</section>
+
+<section id="kategori">
+<h2>Kategori Pilihan</h2>
+<div class="categories">
+<div class="category">👕<p>Fashion</p></div>
+<div class="category">📱<p>Elektronik</p></div>
+<div class="category">🎒<p>Aksesoris</p></div>
+<div class="category">🏠<p>Rumah</p></div>
+<div class="category">💄<p>Kecantikan</p></div>
+</div>
+</section>
+
+<section id="produk">
+<h2>Produk Pilihan</h2>
+<div class="products" id="productList"></div>
+</section>
+</main>
+
+<footer id="tentang">
+<h2>AKUNORA</h2>
+<p>Belanja mudah, nyaman, dan praktis.</p>
+<p>© 2026 AKUNORA. All Rights Reserved.</p>
+</footer>
+
+<script>
+const products=[
+{name:"Kaos Casual",price:75000,emoji:"👕"},
+{name:"Tas Modern",price:120000,emoji:"🎒"},
+{name:"Headphone",price:150000,emoji:"🎧"},
+{name:"Jam Tangan",price:95000,emoji:"⌚"},
+{name:"Sepatu Casual",price:180000,emoji:"👟"},
+{name:"Kacamata",price:65000,emoji:"🕶️"},
+{name:"Botol Minum",price:35000,emoji:"🥤"},
+{name:"Dompet",price:55000,emoji:"👛"}
+];
+let cart=[];
+function rupiah(n){return "Rp"+n.toLocaleString("id-ID")}
+function renderProducts(data){
+document.getElementById("productList").innerHTML=data.map((p,i)=>`
+<div class="product">
+<div style="height:145px;display:flex;align-items:center;justify-content:center;font-size:65px;background:#e8f8ef">${p.emoji}</div>
+<div class="info">
+<strong>${p.name}</strong>
+<div class="price">${rupiah(p.price)}</div>
+<button onclick="addCart('${p.name}')">+ Keranjang</button>
+</div></div>`).join("");
+}
+function addCart(name){
+cart.push(name);
+document.getElementById("cartCount").textContent=cart.length;
+alert(name+" ditambahkan ke keranjang!");
+}
+function showCart(){
+alert("Keranjang belanja:\n"+(cart.length?cart.join("\n"):"Keranjang masih kosong")+"\n\nJumlah produk: "+cart.length);
+}
+function searchProducts(){
+let q=document.getElementById("search").value.toLowerCase();
+renderProducts(products.filter(p=>p.name.toLowerCase().includes(q)));
+}
+renderProducts(products);
+</script>
+</body>
+</html>
