@@ -226,5 +226,19 @@ document.getElementById(id).style.display="none";
 saveCart();
 render();
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const { createClient } = window.supabase;
+
+const supabaseUrl = "https://oaevdzfcrhdarmrglzcd.supabase.co";
+const supabaseKey = "sb_publishable_gdV1nsKIeJj9Zov_e0PCbA_sIPBzszV";
+
+const db = createClient(supabaseUrl, supabaseKey);
+
+console.log("AKUNORA berhasil terhubung ke Supabase!");
+</script>
+
 </body>
 </html>
