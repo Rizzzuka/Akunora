@@ -231,6 +231,31 @@ const db = createClient(supabaseUrl, supabaseKey);
 
 console.log("AKUNORA berhasil terhubung ke Supabase!");
 </script>
+<div id="akunora-auth" style="padding:25px;max-width:400px;margin:30px auto;background:white;border-radius:12px;box-shadow:0 2px 12px #ddd;">
+  <h2>Masuk AKUNORA</h2>
+  <input id="auth-email" type="email" placeholder="Email" style="width:100%;padding:12px;margin:8px 0;">
+  <input id="auth-password" type="password" placeholder="Password" style="width:100%;padding:12px;margin:8px 0;">
+  <button onclick="daftarAkun()" style="width:100%;padding:12px;background:#16a34a;color:white;border:0;border-radius:8px;">Daftar</button>
+  <button onclick="masukAkun()" style="width:100%;padding:12px;margin-top:8px;">Masuk</button>
+  <p id="auth-status"></p>
+</div>
 
+<script>
+async function daftarAkun() {
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+  const { data, error } = await db.auth.signUp({ email, password });
+  document.getElementById('auth-status').textContent =
+    error ? error.message : 'Pendaftaran berhasil. Periksa email jika diminta konfirmasi.';
+}
+
+async function masukAkun() {
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+  const { data, error } = await db.auth.signInWithPassword({ email, password });
+  document.getElementById('auth-status').textContent =
+    error ? error.message : 'Berhasil masuk ke AKUNORA!';
+}
+</script>
 </body>
 </html>
