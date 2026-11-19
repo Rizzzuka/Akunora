@@ -5,6 +5,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AKUNORA - Digital Marketplace</title>
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.auth-buttons button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #16a34a;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f5f7f6;color:#222}
@@ -49,6 +64,14 @@ footer{text-align:center;padding:30px;background:white;margin-top:35px;color:#77
 <header>
 <div class="top">
 <div class="logo">AKUNORA</div>
+<div class="auth-buttons">
+  <button onclick="document.getElementById('akunora-auth').scrollIntoView({behavior:'smooth'})">
+    Daftar
+  </button>
+  <button onclick="document.getElementById('akunora-auth').scrollIntoView({behavior:'smooth'})">
+    Masuk
+  </button>
+</div>
 <input class="search" id="search" placeholder="Cari produk digital..." oninput="render()">
 <button onclick="openCart()">🛒 <span id="count">0</span></button>
 </div>
