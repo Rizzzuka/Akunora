@@ -42,6 +42,7 @@ h2{font-size:21px;margin-top:28px}
 footer{text-align:center;padding:30px;background:white;margin-top:35px;color:#777}
 @media(min-width:650px){.products{grid-template-columns:repeat(4,1fr)}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -107,6 +108,16 @@ footer{text-align:center;padding:30px;background:white;margin-top:35px;color:#77
 </div>
 
 <script>
+// KONEKSI DATABASE AKUNORA
+const SUPABASE_URL = "https://oaevdzfcrhdarmrglzcd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_gdV1nsKIeJj9Zov_e0PCbA_sIPBzszV";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+console.log("AKUNORA berhasil terhubung ke Supabase!");
 const products=[
 {id:1,name:"Template CV Profesional",cat:"Template",price:15000,emoji:"📄",desc:"Template CV profesional untuk melamar pekerjaan."},
 {id:2,name:"E-book Pengembangan Diri",cat:"Ebook",price:25000,emoji:"📚",desc:"Buku digital tentang pengembangan kemampuan diri."},
