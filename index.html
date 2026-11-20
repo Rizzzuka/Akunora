@@ -44,6 +44,8 @@ footer{text-align:center;padding:30px;background:white;margin-top:35px;color:#77
 @media(min-width:650px){.products{grid-template-columns:repeat(4,1fr)}}
 #akunora-store {
   display: none;
+}
+
 html, body {
   min-height: 100%;
   margin: 0;
@@ -51,19 +53,22 @@ html, body {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
 #akunora-auth {
+  width: min(400px, calc(100% - 32px));
   margin: auto !important;
   flex-shrink: 0;
 }
 
 footer#tentang {
-  margin-top: 0;
   width: 100%;
+  margin-top: 0;
   flex-shrink: 0;
+  text-align: center;
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
