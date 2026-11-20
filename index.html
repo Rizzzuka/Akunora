@@ -346,12 +346,35 @@ console.log("AKUNORA berhasil terhubung ke Supabase!");
 </div>
 
 <script>
+
 async function daftarAkun() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
-  const { data, error } = await db.auth.signUp({ email, password });
-  document.getElementById('auth-status').textContent =
-    error ? error.message : 'Pendaftaran berhasil. Periksa email jika diminta konfirmasi.';
+  const status = document.getElementById('auth-status');
+
+  if (password.length < 8) {
+    status.textContent = 'Password minimal 8 karakter!';
+    return;
+  }
+
+  if (!/[a-z]/.test(password)) {
+    status.textContent = 'Password harus mengandung huruf kecil (a-z)!';
+    return;
+  }
+
+  if (!/[0-9]/.test(password)) {
+    status.textContent = 'Password harus mengandung angka (0-9)!';
+    return;
+  }
+
+  const { data, error } = await db.auth.signUp({
+    email,
+    password
+  });
+
+  status.textContent = error
+    ? error.message
+    : 'Pendaftaran berhasil! Silakan periksa email untuk konfirmasi.';
 }
 
 async function masukAkun() {
