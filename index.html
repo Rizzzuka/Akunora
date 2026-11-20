@@ -438,6 +438,33 @@ async function lupaPassword() {
     ? error.message
     : 'Link pemulihan password telah dikirim. Periksa email kamu!';
 }
+  async function updatePassword() {
+  const password = document.getElementById('new-password').value;
+  const status = document.getElementById('reset-status');
+
+  if (password.length < 8) {
+    status.textContent = 'Password minimal 8 karakter!';
+    return;
+  }
+
+  if (!/[a-z]/.test(password)) {
+    status.textContent = 'Harus mengandung huruf kecil!';
+    return;
+  }
+
+  if (!/[0-9]/.test(password)) {
+    status.textContent = 'Harus mengandung angka!';
+    return;
+  }
+
+  const { error } = await db.auth.updateUser({
+    password: password
+  });
+
+  status.textContent = error
+    ? error.message
+    : 'Password berhasil diperbarui!';
+  }
 </script>
 
 <footer id="tentang">
