@@ -349,6 +349,24 @@ console.log("AKUNORA berhasil terhubung ke Supabase!");
   </a>
 </p>
   <p id="auth-status"></p>
+  <div id="reset-password-form" style="display:none; margin-top:20px;">
+  <h3>Buat Password Baru</h3>
+  <p>Masukkan password baru untuk akun AKUNORA kamu.</p>
+
+  <input
+    id="new-password"
+    type="password"
+    placeholder="Password baru"
+    style="width:100%;padding:12px;margin:8px 0;box-sizing:border-box;"
+  >
+
+  <button onclick="updatePassword()"
+    style="width:100%;padding:12px;background:#16a34a;color:white;border:0;border-radius:8px;">
+    Simpan Password Baru
+  </button>
+
+  <p id="reset-status"></p>
+  </div>
 </div>
 
 <script>
