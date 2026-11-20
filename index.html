@@ -403,6 +403,23 @@ async function masukAkun() {
   document.getElementById('akunora-auth').style.display = 'none';
   document.getElementById('akunora-store').style.display = 'block';
 }
+async function lupaPassword() {
+  const email = document.getElementById('auth-email').value;
+  const status = document.getElementById('auth-status');
+
+  if (!email) {
+    status.textContent = 'Masukkan email terlebih dahulu!';
+    return;
+  }
+
+  const { error } = await db.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://rizzzuka.github.io/Akunora/'
+  });
+
+  status.textContent = error
+    ? error.message
+    : 'Link pemulihan password telah dikirim. Periksa email kamu!';
+}
 </script>
 
 <footer id="tentang">
