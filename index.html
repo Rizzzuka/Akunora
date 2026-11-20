@@ -279,9 +279,22 @@ async function daftarAkun() {
 async function masukAkun() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
-  const { data, error } = await db.auth.signInWithPassword({ email, password });
+
+  const { data, error } = await db.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById('auth-status').textContent = error.message;
+    return;
+  }
+
   document.getElementById('auth-status').textContent =
-    error ? error.message : 'Berhasil masuk ke AKUNORA!';
+    'Berhasil masuk ke AKUNORA!';
+
+  document.getElementById('akunora-auth').style.display = 'none';
+  document.getElementById('akunora-store').style.display = 'block';
 }
 </script>
 
