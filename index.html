@@ -465,6 +465,12 @@ async function lupaPassword() {
     ? error.message
     : 'Password berhasil diperbarui!';
   }
+  db.auth.onAuthStateChange((event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    document.getElementById('akunora-auth').style.display = 'block';
+    document.getElementById('reset-password-form').style.display = 'block';
+  }
+});
 </script>
 
 <footer id="tentang">
