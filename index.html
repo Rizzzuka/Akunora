@@ -471,15 +471,7 @@ async function lupaPassword() {
     document.getElementById('reset-password-form').style.display = 'block';
   }
 });
-</script>
-
-<footer id="tentang">
-  <h2>AKUNORA</h2>
-  <p>Digital Marketplace untuk semua kebutuhan digitalmu.</p>
-  <p>© 2026 AKUNORA. All Rights Reserved.</p>
-</footer>
-<script>
-async function tampilkanProduk() {
+  async function tampilkanProduk() {
   const { data, error } = await db
     .from('products')
     .select('*');
@@ -490,7 +482,14 @@ async function tampilkanProduk() {
   }
 
   console.log('Data produk AKUNORA:', data);
-}
+    }
 </script>
+
+<footer id="tentang">
+  <h2>AKUNORA</h2>
+  <p>Digital Marketplace untuk semua kebutuhan digitalmu.</p>
+  <p>© 2026 AKUNORA. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>
