@@ -94,6 +94,12 @@ footer#tentang {
 <body>
 
 <main id="akunora-store">
+  <section id="daftar-produk">
+  <h2>Produk AKUNORA</h2>
+  <div id="produk-container">
+    <p>Memuat produk...</p>
+  </div>
+  </section>
 <section class="hero">
 <h1>Selamat Datang di AKUNORA!</h1>
 <p>Temukan berbagai produk digital berkualitas dengan mudah, cepat, dan praktis.</p>
@@ -471,18 +477,49 @@ async function lupaPassword() {
     document.getElementById('reset-password-form').style.display = 'block';
   }
 });
-  async function tampilkanProduk() {
+async function tampilkanProduk() {
+  const container = document.getElementById('list');
+
+  container.textContent = 'Memuat produk...';
+
   const { data, error } = await db
     .from('products')
-    .select('*');
+    .select('id, name, description, price, stock');
 
   if (error) {
-    console.error('Gagal mengambil produk:', error.message);
+    container.textContent = 'Gagal memuat produk: ' + error.message;
     return;
   }
 
-  console.log('Data produk AKUNORA:', data);
-    }
+  container.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    container.textContent = 'Belum ada produk tersedia.';
+    return;
+  }
+
+  data.forEach((produk) => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+
+    const nama = document.createElement('h3');
+    nama.textContent = produk.name;
+
+    const deskripsi = document.createElement('p');
+    deskripsi.textContent = produk.description || '';
+
+    const harga = document.createElement('p');
+    harga.textContent = 'Rp ' +
+      Number(produk.price).toLocaleString('id-ID');
+
+    const stok = document.createElement('p');
+    stok.textContent = 'Stok: ' + produk.stock;
+
+    card.append(nama, deskripsi, harga, stok);
+    container.appendChild(card);
+  });
+}
+  tampilkanProduk();
 </script>
 
 <footer id="tentang">
