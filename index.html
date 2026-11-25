@@ -107,14 +107,33 @@ footer#tentang {
 </section>
 
 <section id="kategori">
-<h2>Kategori Produk</h2>
-<div class="categories">
-<div class="category active" onclick="filter('Semua',this)"><div>✨</div>Semua</div>
-<div class="category" onclick="filter('Template',this)"><div>🎨</div>Template</div>
-<div class="category" onclick="filter('Ebook',this)"><div>📚</div>E-book</div>
-<div class="category" onclick="filter('Desain',this)"><div>🖼️</div>Desain</div>
-<div class="category" onclick="filter('Pendidikan',this)"><div>🎓</div>Pendidikan</div>
-</div>
+  <h2>Kategori Produk</h2>
+
+  <div class="kategori-container">
+    <button onclick="filterKategori('Instagram')">
+      📸 Instagram
+    </button>
+
+    <button onclick="filterKategori('TikTok')">
+      🎵 TikTok
+    </button>
+
+    <button onclick="filterKategori('Facebook')">
+      📘 Facebook
+    </button>
+
+    <button onclick="filterKategori('YouTube')">
+      ▶️ YouTube
+    </button>
+
+    <button onclick="filterKategori('Google')">
+      🔍 Google
+    </button>
+
+    <button onclick="filterKategori('WhatsApp')">
+      💬 WhatsApp
+    </button>
+  </div>
 </section>
 
 <section id="produk">
