@@ -521,6 +521,29 @@ async function tampilkanProduk() {
 
   render();
 }
+  function filterKategori(kategori) {
+  const hasil = products.filter(produk => {
+    return produk.cat?.toLowerCase() === kategori.toLowerCase();
+  });
+
+  const container = document.getElementById('list');
+
+  if (!container) return;
+
+  if (hasil.length === 0) {
+    container.innerHTML = '<p>Belum ada produk dalam kategori ini.</p>';
+    return;
+  }
+
+  container.innerHTML = hasil.map(produk => `
+    <div class="produk-card">
+      <h3>${produk.emoji || '🛍️'} ${produk.name}</h3>
+      <p>${produk.desc || ''}</p>
+      <p>Harga: Rp${Number(produk.price).toLocaleString('id-ID')}</p>
+      <p>Stok: ${produk.stock ?? 0}</p>
+    </div>
+  `).join('');
+  }
 </script>
 
 <footer id="tentang">
