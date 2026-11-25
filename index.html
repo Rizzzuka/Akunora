@@ -143,7 +143,7 @@ footer#tentang {
 <script>
 
 console.log("AKUNORA berhasil terhubung ke Supabase!");
-const products=[
+let products = [
 {id:1,name:"Template CV Profesional",cat:"Template",price:15000,emoji:"📄",desc:"Template CV profesional untuk melamar pekerjaan."},
 {id:2,name:"E-book Pengembangan Diri",cat:"Ebook",price:25000,emoji:"📚",desc:"Buku digital tentang pengembangan kemampuan diri."},
 {id:3,name:"Template Instagram",cat:"Desain",price:20000,emoji:"🎨",desc:"Template desain media sosial yang menarik."},
@@ -478,48 +478,30 @@ async function lupaPassword() {
   }
 });
 async function tampilkanProduk() {
-  const container = document.getElementById('produk-container');
-
-  container.textContent = 'Memuat produk...';
-
   const { data, error } = await db
     .from('products')
-    .select('id, name, description, price, stock');
+    .select('id, name, description, price, stock')
+    .order('created_at', { ascending: false });
 
   if (error) {
-    container.textContent = 'Gagal memuat produk: ' + error.message;
+    console.error('Gagal mengambil produk:', error.message);
     return;
   }
 
-  container.innerHTML = '';
+  if (!data) return;
 
-  if (!data || data.length === 0) {
-    container.textContent = 'Belum ada produk tersedia.';
-    return;
-  }
+  products = data.map(p => ({
+    id: p.id,
+    name: p.name,
+    desc: p.description || '',
+    price: Number(p.price),
+    stock: p.stock,
+    emoji: '🛍️',
+    cat: 'Semua'
+  }));
 
-  data.forEach((produk) => {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-
-    const nama = document.createElement('h3');
-    nama.textContent = produk.name;
-
-    const deskripsi = document.createElement('p');
-    deskripsi.textContent = produk.description || '';
-
-    const harga = document.createElement('p');
-    harga.textContent = 'Rp ' +
-      Number(produk.price).toLocaleString('id-ID');
-
-    const stok = document.createElement('p');
-    stok.textContent = 'Stok: ' + produk.stock;
-
-    card.append(nama, deskripsi, harga, stok);
-    container.appendChild(card);
-  });
+  render();
 }
-  tampilkanProduk();
 </script>
 
 <footer id="tentang">
